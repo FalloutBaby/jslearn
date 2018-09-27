@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title> ARR </title>
+	<script>
+	
+		/* var arr = ["Яблоко", "Апельсин", "Груша", "Лимон"];
+
+		function random(max, min = 0) {
+			var rand = min + Math.floor(Math.random() * (max + 1 - min));
+			return rand;
+		}
+		alert(arr[random(arr.length)]);
+		
+		// Калькулятор для введенных значений
+		
+		var number_arr = [];
+		
+		while (number = prompt("Введите число. Ввод любых иных значений запустит сложение.")){
+			if (isNaN(parseInt(number))) {
+				break;
+			}
+			  number_arr.push(number);
+		}
+		
+		var summ = 0;
+		for (var i = 0; i < number_arr.length; i++) {
+  			summ += parseInt(number_arr[i]);
+		}
+		
+		 alert(summ);
+		
+		// Поиск в массиве
+		
+		function find(arr, value) {
+    		for (var i = 0; i < arr.length; i++) {
+      			if (arr[i] === value) {
+        			return i;
+      			}
+    		}
+    		return -1;
+		}
+		
+		// Фильтр диапазона
+		
+		function filterRange(array, a, b) {
+      		var newArr = [];
+					console.log(array);
+					console.log(array.lenght);
+      		for (var i in array) {
+				if (array[i] >= a && array[i] <= b) {
+					console.log(i);
+      				newArr.push(array[i]);
+				}
+      		}
+      		return newArr;
+    	}
+		
+		var arr = [5, 3, 8, 1];
+		console.log(filterRange(arr, 1, 4));
+		
+		// Решето Эратосфена
+		
+		function eratosthenesSieve(from, till) {
+			var allNums = [];
+			for (var i = 0; i < till - 1; i++) {
+				allNums.push(i+2);
+				for (var j = 0; j < allNums.length - 1; j++) {
+					
+					if ((allNums[allNums.length - 1])%(allNums[j]) === 0) {
+						allNums.pop();
+						break;
+					}
+					
+				}
+			}
+			var yourChoice = [];
+			for (var k = 0; k < allNums.length; k++) {
+				if (allNums[k] >= from) {
+					yourChoice.push(allNums[k]);
+				}
+			}
+			return yourChoice;
+		}
+		
+		var result = eratosthenesSieve(24, 200);
+		var sum = 0;
+		for (i = 0; i < result.length; i++) {
+  			if (result[i]) {
+    			sum += i;
+  			}
+		}
+		
+		console.log(result);
+		console.log(sum);
+		*/
+		
+		// Подмассив наибольшей суммы
+		
+		function getMaxSubSum(arr) {
+			var summ = 0,
+				otherSumm = 0;
+			var pause = false;
+			for (var i=0; i < arr.length; i++) {
+				if (arr[i] < 0) {
+					if (otherSumm > summ) {
+						summ = otherSumm;
+						otherSumm = 0;
+					}
+					if (pause == true) {
+						otherSumm = 0;
+					}
+					pause = true;
+					continue;
+				}
+				if (pause == true) {
+					otherSumm += arr[i];
+					continue;
+				}
+				summ += arr[i];
+			}
+			if (otherSumm > summ) {
+            	summ = otherSumm;
+			}
+			return summ;
+		}
+		// OR
+		function getMaxSubSum(arr) {
+			var maxSum = 0,
+				partialSum = 0;
+			for (var i = 0; i < arr.length; i++) {
+				partialSum += arr[i];
+				maxSum = Math.max(maxSum, partialSum);
+				if (partialSum < 0) partialSum = 0;
+			}
+			return maxSum;
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>

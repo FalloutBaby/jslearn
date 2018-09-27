@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title> ARR METHODS </title>
+	<script>
+		// Добавить класс в строку
+		function addClass(obj, cls) {
+			var classes = obj.className ? obj.className.split(' ') : [];
+			for (var i = 0; i < classes.length; i++) {
+				if (classes[i] == cls) return;
+			}
+			classes.push(cls);
+			obj.className = classes.join(' ');
+		}
+		var obj = {
+			className: 'open menu'
+		};
+		addClass(obj, 'new');
+		addClass(obj, 'open');
+		addClass(obj, 'me');
+		console.log(obj.className);
+
+		// Перевести текст вида border-left-width в borderLeftWidth
+
+		function camelize(str) {
+			var arr = str.split('-');
+			for (var i = 1; i < arr.length; i++) {
+				arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+			}
+			str = arr.join('');
+			return str;
+		}
+
+		console.log(camelize("background-color"));
+		console.log(camelize("list-style-image"));
+		console.log(camelize("-webkit-transition"));
+
+		// Функция removeClass
+
+		function removeClass(obj, cls) {
+			var classes = obj.className ? obj.className.split(' ') : [];
+			for (var i = 0; i < classes.length; i++) {
+				if (classes[i] == cls) {
+					classes.splice(i, 1);
+					i--;
+				};
+			}
+			obj.className = classes.join(' ');
+		}
+
+		var obj = {
+			className: 'open menu'
+		};
+
+		removeClass(obj, 'open');
+		console.log(obj.className);
+		removeClass(obj, 'blabla');
+		console.log(obj.className);
+
+		var obj = {
+			className: 'my menu menu'
+		};
+
+		removeClass(obj, 'menu');
+		console.log(obj.className); // 'my'
+
+		// Фильтрация массива "на месте"
+
+		function filterRangeInPlace(arr, a, b) {
+			var min, max;
+			if (a > b) {
+				max = a;
+				min = b;
+			} else {
+				max = b;
+				min = a;
+			}
+			for (var i = 0; i < arr.length; i++) {
+				if (arr[i] > max || arr[i] < min) {
+					arr.splice(i, 1);
+					i--;
+				}
+			}
+		}
+
+		arr = [5, 3, 8, 1];
+
+		filterRangeInPlace(arr, 1, 4); // удалены числа вне диапазона 1..4
+
+		console.log(arr);
+
+		// Сортировать в обратном порядке
+
+		var arr = [5, 2, 1, -10, 8];
+
+		function compareNumeric(a, b) {
+			return b - a;
+		}
+		console.log(arr.sort(compareNumeric)); // 8, 5, 2, 1, -10
+
+		// Скопировать и отсортировать массив
+
+		var arr = ["HTML", "JavaScript", "CSS"];
+
+		var arrSorted = arr.slice().sort();
+
+		console.log(arrSorted);
+		console.log(arr);
+
+		// Случайный порядок в массиве
+
+		var arr = [1, 2, 3, 4, 5];
+
+		arr.sort(mixIt);
+
+		function mixIt(a, b) {
+			return Math.random() - 0.5;
+		}
+
+		console.log(arr); // элементы в случайном порядке, например [3,5,1,2,4]
+
+		// Сортировка объектов
+
+		var vasya = {
+			name: "Вася",
+			age: 23
+		};
+		var masha = {
+			name: "Маша",
+			age: 18
+		};
+		var vovochka = {
+			name: "Вовочка",
+			age: 6
+		};
+
+		var people = [vasya, masha, vovochka];
+
+		function compareAge(a, b) {
+			return a.age - b.age;
+		}
+
+		people.sort(compareAge);
+
+		for (var i = 0; i < people.length; i++) {
+			console.log(people[i].name);
+		}
+
+		// Вывести односвязный список
+
+		var list = {
+			value: 1
+		};
+		list.next = {
+			value: 2
+		};
+		list.next.next = {
+			value: 3
+		};
+		list.next.next.next = {
+			value: 4
+		};
+		// Напишите функцию printList(list), которая выводит элементы списка по очереди, при помощи цикла.
+		function printList(list) {
+			while (list) {
+				console.log(list.value);
+				list = list.next;
+			}
+		}
+		console.log('Циклом');
+		printList(list);
+
+		// Напишите функцию printList(list) при помощи рекурсии.
+		function printList2(list) {
+			console.log(list.value);
+			if (list.next) {
+				printList(list.next);
+			}
+		}
+		console.log('Рекурсией');
+		printList2(list);
+
+		// Напишите функцию printReverseList(list), которая выводит элементы списка в обратном порядке, при помощи рекурсии. Для списка выше она должна выводить 4,3,2,1
+
+		function printReverseList(list) {
+			if (list.next) {
+				printReverseList(list.next);
+			}
+			console.log(list.value);
+		}
+		console.log('Рекурсией');
+		printReverseList(list);
+
+		// Сделайте вариант printReverseList(list), использующий не рекурсию, а цикл.
+		function printReverseList2(list) {
+			var valueArr = [];
+			while (list) {
+				valueArr.push(list.value);
+				list = list.next;
+			}
+			for (var i = valueArr.length - 1; i >= 0; i--) {
+				console.log(valueArr[i]);
+			}
+		}
+		console.log('Циклом');
+		printReverseList2(list);
+
+		// Отфильтровать анаграммы
+
+		function aclean(arr) {
+			for (var i = 0; i < arr.length; i++) {
+				
+			}
+		}
+		
+		var arr = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
+
+		alert(aclean(arr));
+
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title> ARR METHODS </title>
+	<script>
+		// Перепишите цикл через map
+
+		var arr = ["Есть", "жизнь", "на", "Марсе"];
+
+		/*
+		var arrLength = [];
+		for (var i = 0; i < arr.length; i++) {
+			arrLength[i] = arr[i].length;
+		}
+		*/
+
+		var arrLength = arr.map(function(string) {
+			return string.length;
+		})
+
+		alert(arrLength);
+		
+		// Массив частичных сумм
+		
+		let arr = [1,2,3,4,5];
+		
+		function getSums(arr){
+			let newArr = [];
+			let sums = arr.reduce(function(sum, number, i){
+				newArr[i] = sum + number;
+				return newArr[i];
+			}, 0);
+			return newArr;
+		}
+		
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
