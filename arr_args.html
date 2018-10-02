@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title> ARR METHODS </title>
+	<script>
+		// Проверка на аргумент-undefined
+
+		function f(x) {
+			// выведите 1, если первый аргумент есть, и 0 - если нет
+			if(arguments.length){
+				return 0;
+			}
+			return 1;
+		}
+
+		console.log(f(undefined)); // 1
+		console.log(f()); // 0
+
+		// Сумма аргументов
+
+		function sum() {
+			let sum = 0;
+			if (arguments) {
+				for (var i = 0; i < arguments.length; i++) {
+					sum += arguments[i];
+				}
+			}
+			return sum;
+		}
+
+		/*console.log(sum()); // 0
+		console.log(sum(1)); // 1
+		console.log(sum(1, 2)); // 3
+		console.log(sum(1, 2, 3)); // 6
+		console.log(sum(1, 2, 3, 4)); // 10*/
+
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
