@@ -123,6 +123,7 @@
 
 		// Сортировка объектов
 
+		console.log("Сортировка объектов");
 		var vasya = {
 			name: "Вася",
 			age: 23
@@ -169,7 +170,7 @@
 				list = list.next;
 			}
 		}
-		console.log('Циклом');
+		console.log('Циклом выводит элементы списка по очереди');
 		printList(list);
 
 		// Напишите функцию printList(list) при помощи рекурсии.
@@ -179,7 +180,7 @@
 				printList(list.next);
 			}
 		}
-		console.log('Рекурсией');
+		console.log('Рекурсией выводит элементы списка по очереди');
 		printList2(list);
 
 		// Напишите функцию printReverseList(list), которая выводит элементы списка в обратном порядке, при помощи рекурсии. Для списка выше она должна выводить 4,3,2,1
@@ -190,7 +191,7 @@
 			}
 			console.log(list.value);
 		}
-		console.log('Рекурсией');
+		console.log('Рекурсией выводит элементы списка в обратном порядке');
 		printReverseList(list);
 
 		// Сделайте вариант printReverseList(list), использующий не рекурсию, а цикл.
@@ -204,21 +205,70 @@
 				console.log(valueArr[i]);
 			}
 		}
-		console.log('Циклом');
+		console.log('Циклом выводит элементы списка в обратном порядке');
 		printReverseList2(list);
 
-		// Отфильтровать анаграммы
+		// Отфильтровать анаграммы, выполнено после последней задачи
 
 		function aclean(arr) {
+			var newArr = {};
 			for (var i = 0; i < arr.length; i++) {
-				
+				var alphabetical = arr[i].toLowerCase().split('').sort().join('');
+				newArr[alphabetical] = arr[i];
 			}
+			var result = [];
+			
+			for (var word in newArr) {
+				result.push(newArr[word]);
+			}
+			
+			return result;
 		}
-		
+
 		var arr = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
+		
+		console.log('Отфильтровать анаграмму "воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"');
+		console.log(aclean(arr));
 
-		alert(aclean(arr));
+		// Оставить уникальные элементы массива
 
+		console.log("Оставить уникальные элементы массива");
+
+		function unique(arr) {
+			var newArr = [];
+			for (var i = 0; i < arr.length; i++) {
+				let res = newArr.length;
+				for (var j = 0; j < newArr.length; j++) {
+					if (arr[i] != newArr[j]) {
+						res--;
+					}
+				}
+				if (res == 0) {
+					newArr.push(arr[i]);
+				}
+			}
+			return newArr;
+		}
+
+		var strings = ["кришна", "кришна", "харе", "харе",
+			"харе", "харе", "кришна", "кришна", "8-()"
+		];
+
+		console.log(unique(strings)); // кришна, харе, 8-()
+
+
+		/* Решение с сайта для _последней_ задачи - другое, более быстрое
+		function unique2(arr) {
+			var obj = {};
+
+			for (var i = 0; i < arr.length; i++) {
+				var str = arr[i];
+				obj[str] = true;
+			}
+			return Object.keys(obj);
+		}
+		*/
+		
 	</script>
 </head>
 
