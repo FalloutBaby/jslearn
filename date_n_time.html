@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title> Date and Time </title>
+	<script>
+		// 1
+
+		var specialDate = new Date(2012, 02, 20, 3, 12);
+		console.log(specialDate);
+
+		// 2
+
+		function getWeekDay(date) {
+			var days = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+
+			return days[date.getDay()];
+		}
+
+		var date = new Date(2012, 0, 3);
+		console.log(getWeekDay(date));
+
+		// 3
+
+		function getLocalDay(date) {
+			var day = date.getDay();
+			if (day == 0) {
+				day = 7;
+			}
+			return day;
+		}
+
+		var date = new Date(2012, 0, 3);
+		console.log(getLocalDay(date));
+
+		// 4
+
+		function getDateAgo(date, days) {
+			var result = new Date(date);
+			result.setDate(date.getDate() - days);
+			return result.getDate();
+		}
+
+		var date = new Date(2015, 0, 2);
+		console.log(getDateAgo(date, 1));
+		console.log(getDateAgo(date, 2));
+		console.log(getDateAgo(date, 365));
+
+		// 5
+
+		function getLastDayOfMonth(year, month) {
+			for (var i = 31; i > 27; i--) {
+				var isSameMonth = new Date(year, month, i);
+				if (isSameMonth.getMonth() == month) {
+					return i;
+				}
+				continue;
+			}
+		}
+
+		/* Решение с сайта другое:
+		function getLastDayOfMonth(year, month) {
+  			var date = new Date(year, month + 1, 0);
+  			return date.getDate();
+  		}
+		*/
+
+		console.log(getLastDayOfMonth(2012, 1));
+
+		// 6
+
+		function getSecondsToday() {
+			var start = new Date().setHours(0, 0, 0);
+			return (new Date() - start) / 1000;
+		}
+
+		console.log(getSecondsToday());
+
+		/* Решение с сайта другое:
+		
+		function getSecondsToday() {
+			var now = new Date();
+			var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+			var diff = now - today;
+  			return Math.floor(diff / 1000);
+		}
+		
+		function getSecondsToday() {
+  			var d = new Date();
+			return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+		};
+		*/
+
+		// 7
+
+		function getSecondsToTomorrow() {
+			var start = new Date().setHours(24, 0, 0);
+			return (start - new Date()) / 1000;
+		}
+
+		console.log(getSecondsToTomorrow());
+
+		/* Решение с сайта другое:
+		
+		function getSecondsToTomorrow() {
+  			var now = new Date();
+  			var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+			var diff = tomorrow - now;
+  			return Math.round(diff / 1000);
+		}
+		*/
+
+		// 8
+
+		function formatDate(date) {
+			var day = date.getDate();
+			if (day < 10) {
+				day = '0' + day;
+			}
+			var month = date.getMonth() + 1;
+			if (month < 10) {
+				month = '0' + month;
+			}
+
+			var year = date.getFullYear() % 100;
+			if (year < 10) {
+				year = '0' + year;
+			}
+
+			return day + '.' + month + '.' + year;
+		}
+
+		var d = new Date(2014, 0, 30);
+		console.log(formatDate(d));
+
+		// 9
+
+		function formatDate2(date) {
+			var x = ((new Date() - date) / 1000);
+			if (x < 1) {
+				return 'только что';
+			}
+			if (x < 60) {
+				return x + ' сек. назад';
+			}
+			if (x < 360) {
+				return x/60 + ' мин. назад';
+			}
+			return formatDate(date) + ' ' + formatTime(date);
+		}
+		
+		function formatTime(date) {
+			var hour = date.getHours();
+			if (hour < 10) {
+				hour = '0' + hour;
+			}
+			var minute = date.getMinutes() + 1;
+			if (minute < 10) {
+				minute = '0' + minute;
+			}
+
+			return hour + ':' + minute;
+		}
+
+		console.log(formatDate2(new Date(new Date - 1)));
+		console.log(formatDate2(new Date(new Date - 30 * 1000)));
+		console.log(formatDate2(new Date(new Date - 5 * 60 * 1000)));
+		console.log(formatDate2(new Date(new Date - 86400 * 1000)));
+
+	</script>
+</head>
+
+<body></body>
+
+</html>
