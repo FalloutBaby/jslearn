@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title> METHODS | THIS </title>
+	<script>
+		// Калькулятор
+
+		var calculator = {
+			a: 0,
+			b: 0,
+			read: function() {
+				this.a = +prompt("Введите 1 число: "),
+					this.b = +prompt("Введите 2 число: ")
+			},
+			sum: function() {
+				return "Сумма: " + (this.a + this.b);
+			},
+			mul: function() {
+				return "Произведение: " + this.a * this.b;
+			}
+		};
+
+		calculator.read();
+		alert(calculator.sum());
+		alert(calculator.mul());
+
+		// Цепочка вызовов
+
+		var ladder = {
+			step: 0,
+			up: function() { // вверх по лестнице
+				this.step++;
+				return this;
+			},
+			down: function() { // вниз по лестнице
+				this.step--;
+				return this;
+			},
+			showStep: function() { // вывести текущую ступеньку
+				alert(this.step);
+				return this;
+			}
+		};
+		
+		ladder.up().up().down().up().down().showStep();
+
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
