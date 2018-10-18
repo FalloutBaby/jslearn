@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title> METHODS | New </title>
+	<script>
+		// Калькулятор
+
+		function Calculator() {
+			this.a = 0;
+			this.b = 0;
+
+			this.read = function() {
+				this.a = +prompt('1-е число');
+				this.b = +prompt('2-е число');
+			}
+
+			this.sum = function() {
+				return this.a + this.b;
+			}
+
+			this.mul = function() {
+				return this.a * this.b;
+			}
+		}
+
+		var calculator = new Calculator();
+		calculator.read();
+
+		console.log("Сумма=" + calculator.sum());
+		console.log("Произведение=" + calculator.mul());
+
+		// Аккумулятор
+
+		function Accumulator(startingValue) {
+			this.value = startingValue;
+
+			this.read = function() {
+				this.value += +prompt('Добавьте новое кол-во', 0);
+			}
+		}
+
+		var accumulator = new Accumulator(1);
+		accumulator.read();
+		accumulator.read();
+		console.log(accumulator.value);
+
+		// Ещё один калькулятор
+
+		function Calculator2() {
+
+			var methods = {
+				"-": function(a, b) {
+					return a - b;
+				},
+				"+": function(a, b) {
+					return a + b;
+				}
+			};
+
+			this.calculate = function(str) {
+				let arr = str.split(' ');
+				a = +arr[0];
+				b = +arr[2];
+				operation = arr[1];
+
+				if (!methods[operation] || isNaN(a) || isNaN(b)) {
+					return NaN;
+				}
+				
+				return methods[operation](a, b);
+			}
+
+			this.addMethod = function(name, func) {
+				methods[name] = func;
+			}
+		}
+
+		var calc = new Calculator2;
+		console.log(calc.calculate("3 + 7"));
+
+		var powerCalc = new Calculator2;
+		powerCalc.addMethod("*", function(a, b) {
+			return a * b;
+		});
+		powerCalc.addMethod("/", function(a, b) {
+			return a / b;
+		});
+		powerCalc.addMethod("**", function(a, b) {
+			return Math.pow(a, b);
+		});
+
+		var result = powerCalc.calculate("2 ** 3");
+		console.log(result);
+
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
