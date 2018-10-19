@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title> METHODS | Descriptors</title>
+	<script>
+		// Добавить get/set
+
+		function User(fullName) {
+			this.fullName = fullName;
+
+			Object.defineProperties(this, {
+				firstName: {
+
+					get: function() {
+						return this.fullName.split(' ')[0];
+					},
+
+					set: function(firstName) {
+						this.fullName = firstName + ' ' + this.lastName;
+					}
+				},
+				lastName: {
+
+					get: function() {
+						return this.fullName.split(' ')[1];
+					},
+
+					set: function(lastName) {
+						this.fullName = this.firstName + ' ' + lastName;
+					}
+				}
+			});
+		}
+
+		var vasya = new User("Василий Попкин");
+
+		alert(vasya.firstName);
+		alert(vasya.lastName);
+
+		vasya.lastName = 'Сидоров';
+
+		alert(vasya.fullName);
+
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
